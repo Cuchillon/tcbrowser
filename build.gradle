@@ -1,0 +1,36 @@
+plugins {    
+    id 'java'    
+    id 'application'
+}
+
+test {
+    testLogging.showStandardStreams = true
+    
+    useTestNG {
+        suites 'src/test/resources/testng-suite.xml'
+    }
+
+    options {
+        useDefaultListeners = false
+        listeners << 'org.uncommons.reportng.JUnitXMLReporter'
+    }
+
+    if (project.hasProperty('browser')) {
+        System.setProperty('browser', "${browser}")
+    }
+}
+
+dependencies {    
+    compile 'com.google.guava:guava:23.0'
+    compile 'org.seleniumhq.selenium:selenium-remote-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-support:3.141.59'
+    compile 'org.testcontainers:selenium:1.12.2'
+    testCompile 'org.testng:testng:6.10'    
+    testCompile("org.uncommons:reportng:1.1.4") { exclude group: "org.testng", module: "testng" }
+}
+
+repositories {
+    jcenter()
+}
