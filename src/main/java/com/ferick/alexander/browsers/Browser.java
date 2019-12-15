@@ -1,11 +1,15 @@
 package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
+import com.ferick.alexander.Property;
+import com.ferick.alexander.pages.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Browser {
@@ -16,6 +20,11 @@ public abstract class Browser {
     public Browser(ApplicationManager app) {
         this.app = app;
         configureWebDriver();
+    }
+
+    public <T extends Page> T openPage(Class<T> pageClass, String path) {
+        driver.get(app.getProperty(Property.UI_BASE_URL) + path);
+        return createPageInstance(pageClass);
     }
 
     public WebDriver getDriver() {
@@ -45,5 +54,22 @@ public abstract class Browser {
 
     private void clearCache() {
         driver.manage().deleteAllCookies();
+    }
+
+    private <T extends Page> T createPageInstance(Class<T> pageClass) {
+        Constructor<T> constructor;
+        T page;
+        try {
+            constructor = pageClass.getConstructor(WebDriver.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("Constructor with WebDriver was not found", e);
+        }
+        try {
+            page = constructor.newInstance(driver);
+        } catch (Exception e) {
+            throw new RuntimeException("Exception on creating instance of the page " +
+                    pageClass.getCanonicalName(), e);
+        }
+        return page;
     }
 }

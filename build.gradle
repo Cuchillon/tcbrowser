@@ -31,6 +31,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
     compile 'org.seleniumhq.selenium:selenium-support:3.141.59'
     compile 'org.testcontainers:selenium:1.12.2'
+    compile 'com.google.inject:guice:4.0-beta5'
     testCompile 'org.testng:testng:6.10'    
     testCompile("org.uncommons:reportng:1.1.4") { exclude group: "org.testng", module: "testng" }
 }
