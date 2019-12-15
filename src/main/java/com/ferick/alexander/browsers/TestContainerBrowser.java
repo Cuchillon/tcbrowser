@@ -22,6 +22,8 @@ public class TestContainerBrowser extends Browser {
             browserContainer = new BrowserWebDriverContainer().withCapabilities(getChromeOptions());
         }
 
+        browserContainer.start();
+
         return browserContainer.getWebDriver();
     }
 }
