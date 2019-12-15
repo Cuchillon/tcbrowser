@@ -22,6 +22,10 @@ test {
     if (project.hasProperty('orchestrator')) {
         System.setProperty('orchestrator', "${orchestrator}")
     }
+
+    if (project.hasProperty('record')) {
+        System.setProperty('record', "${record}")
+    }
 }
 
 dependencies {    

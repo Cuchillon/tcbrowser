@@ -2,6 +2,7 @@ package com.ferick.alexander;
 
 import com.ferick.alexander.browsers.Browser;
 import com.ferick.alexander.pages.MainPage;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -20,5 +21,10 @@ public class MainPageTest extends TestBase {
     public void mainPageOpenTest() {
         MainPage mainPage = browser.openPage(MainPage.class);
         assertTrue(mainPage.isOpened());
+    }
+
+    @AfterClass
+    public void tearDown() {
+        browser.closeDriver();
     }
 }

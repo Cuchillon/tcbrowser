@@ -33,15 +33,13 @@ public abstract class Browser {
         return createPageInstance(pageClass);
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void closeDriver() {
-        driver.close();
-    }
+    public abstract void closeDriver();
 
     protected abstract WebDriver createWebDriver(String browserType);
+
+    protected WebDriver getDriver() {
+        return driver;
+    }
 
     protected ChromeOptions getChromeOptions() {
         return new ChromeOptions();

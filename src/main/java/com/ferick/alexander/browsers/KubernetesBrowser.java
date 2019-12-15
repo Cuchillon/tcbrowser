@@ -13,4 +13,9 @@ public class KubernetesBrowser extends Browser {
     protected WebDriver createWebDriver(String browserType) {
         return null;
     }
+
+    @Override
+    public void closeDriver() {
+        getDriver().close();
+    }
 }
