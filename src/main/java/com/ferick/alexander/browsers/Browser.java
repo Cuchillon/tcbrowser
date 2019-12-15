@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
 
 import java.lang.reflect.Constructor;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Browser {
@@ -79,6 +80,11 @@ public abstract class Browser {
     }
 
     private <T extends AbstractPage> String getPagePath(Class<T> pageClass) {
-        return pageClass.getAnnotation(Page.class).path();
+        Optional<Page> annotation = Optional.ofNullable(pageClass.getAnnotation(Page.class));
+        if (annotation.isPresent()) {
+            return annotation.get().path();
+        } else {
+            throw new RuntimeException(pageClass.getCanonicalName() + " does not have Page annotation");
+        }
     }
 }
