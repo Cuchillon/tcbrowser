@@ -18,6 +18,10 @@ test {
     if (project.hasProperty('browser')) {
         System.setProperty('browser', "${browser}")
     }
+
+    if (project.hasProperty('orchestrator')) {
+        System.setProperty('orchestrator', "${orchestrator}")
+    }
 }
 
 dependencies {    

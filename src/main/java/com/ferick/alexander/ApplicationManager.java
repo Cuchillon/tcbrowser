@@ -1,5 +1,8 @@
 package com.ferick.alexander;
 
+import com.ferick.alexander.browsers.Browser;
+import com.ferick.alexander.browsers.BrowserFactory;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -21,7 +24,7 @@ public class ApplicationManager {
 
     public Browser browser() {
         if (browser == null) {
-            browser = new Browser(this);
+            browser = new BrowserFactory(this).getBrowser();
         }
         return browser;
     }
