@@ -2,6 +2,7 @@ package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
 import com.ferick.alexander.Property;
+import com.ferick.alexander.pages.AbstractPage;
 import com.ferick.alexander.pages.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Browser {
@@ -22,7 +22,12 @@ public abstract class Browser {
         configureWebDriver();
     }
 
-    public <T extends Page> T openPage(Class<T> pageClass, String path) {
+    public <T extends AbstractPage> T openPage(Class<T> pageClass) {
+        String path = getPagePath(pageClass);
+        return openPage(pageClass, path);
+    }
+
+    public <T extends AbstractPage> T openPage(Class<T> pageClass, String path) {
         driver.get(app.getProperty(Property.UI_BASE_URL) + path);
         return createPageInstance(pageClass);
     }
@@ -56,7 +61,7 @@ public abstract class Browser {
         driver.manage().deleteAllCookies();
     }
 
-    private <T extends Page> T createPageInstance(Class<T> pageClass) {
+    private <T extends AbstractPage> T createPageInstance(Class<T> pageClass) {
         Constructor<T> constructor;
         T page;
         try {
@@ -71,5 +76,9 @@ public abstract class Browser {
                     pageClass.getCanonicalName(), e);
         }
         return page;
+    }
+
+    private <T extends AbstractPage> String getPagePath(Class<T> pageClass) {
+        return pageClass.getAnnotation(Page.class).path();
     }
 }

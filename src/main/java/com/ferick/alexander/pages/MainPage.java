@@ -5,9 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MainPage extends Page {
-
-    public static final String PATH = "/";
+@Page(path = "/")
+public class MainPage extends AbstractPage {
 
     @FindBy(id = "elRegisterButton")
     private WebElement registerButton;

@@ -18,7 +18,7 @@ public class MainPageTest extends TestBase {
 
     @Test
     public void mainPageOpenTest() {
-        MainPage mainPage = browser.openPage(MainPage.class, MainPage.PATH);
+        MainPage mainPage = browser.openPage(MainPage.class);
         assertTrue(mainPage.isOpened());
     }
 }

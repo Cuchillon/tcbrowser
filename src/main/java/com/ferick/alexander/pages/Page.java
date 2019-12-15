@@ -1,17 +1,13 @@
 package com.ferick.alexander.pages;
 
-import com.ferick.alexander.utils.ElementWait;
-import org.openqa.selenium.WebDriver;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public abstract class Page {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Page {
 
-    protected WebDriver driver;
-    protected ElementWait elementWait;
-
-    public Page(WebDriver driver) {
-        this.driver = driver;
-        elementWait = new ElementWait(driver);
-    }
-
-    public abstract boolean isOpened();
+    String path();
 }
