@@ -17,7 +17,7 @@ public class MainPageTest extends TestBase {
         browser = app.browser();
     }
 
-    @Test
+    @Test(description = "Testing MainPage is open")
     public void mainPageOpenTest() {
         MainPage mainPage = browser.openPage(MainPage.class);
         assertTrue(mainPage.isOpened());

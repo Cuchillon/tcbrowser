@@ -1,6 +1,25 @@
-plugins {    
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.8.1"
+    }
+}
+
+plugins {
     id 'java'    
     id 'application'
+}
+
+apply plugin: 'io.qameta.allure'
+
+allure {
+    version = '2.13.0'
+    autoconfigure = true
+    aspectjweaver = true
+    allureJavaVersion = '2.13.0'
 }
 
 test {
@@ -36,6 +55,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-support:3.141.59'
     compile 'org.testcontainers:selenium:1.12.2'
     compile 'com.google.inject:guice:4.0-beta5'
+    compile 'io.qameta.allure:allure-testng:2.7.0'
     testCompile 'org.testng:testng:6.10'    
     testCompile("org.uncommons:reportng:1.1.4") { exclude group: "org.testng", module: "testng" }
 }
