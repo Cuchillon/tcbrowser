@@ -3,6 +3,7 @@ package com.ferick.alexander.pages;
 import com.ferick.alexander.utils.ElementWait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.Optional;
@@ -14,6 +15,7 @@ public abstract class AbstractPage {
 
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
         elementWait = new ElementWait(driver);
     }
 

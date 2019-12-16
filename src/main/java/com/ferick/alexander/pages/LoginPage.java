@@ -22,7 +22,6 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     @Override
