@@ -15,7 +15,9 @@ public class KubernetesBrowser extends Browser {
     }
 
     @Override
-    public void closeDriver() {
-        getDriver().close();
+    public void closeBrowser() {
+        if (getDriver() != null) {
+            getDriver().close();
+        }
     }
 }

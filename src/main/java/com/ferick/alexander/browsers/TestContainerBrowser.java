@@ -41,9 +41,11 @@ public class TestContainerBrowser extends Browser {
     }
 
     @Override
-    public void closeDriver() {
+    public void closeBrowser() {
         if (browserContainer != null) {
-            getDriver().close();
+            if (getDriver() != null) {
+                getDriver().close();
+            }
             browserContainer.stop();
         }
     }

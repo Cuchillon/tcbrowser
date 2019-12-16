@@ -25,6 +25,6 @@ public class MainPageTest extends TestBase {
 
     @AfterClass
     public void tearDown() {
-        browser.closeDriver();
+        browser.closeBrowser();
     }
 }

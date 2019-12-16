@@ -33,7 +33,7 @@ public abstract class Browser {
         return createPageInstance(pageClass);
     }
 
-    public abstract void closeDriver();
+    public abstract void closeBrowser();
 
     protected abstract WebDriver createWebDriver(String browserType);
 
