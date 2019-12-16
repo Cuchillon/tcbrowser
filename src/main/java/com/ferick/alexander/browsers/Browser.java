@@ -4,6 +4,8 @@ import com.ferick.alexander.ApplicationManager;
 import com.ferick.alexander.Property;
 import com.ferick.alexander.pages.AbstractPage;
 import com.ferick.alexander.pages.Page;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -31,6 +33,10 @@ public abstract class Browser {
     public <T extends AbstractPage> T openPage(Class<T> pageClass, String path) {
         driver.get(app.getProperty(Property.UI_BASE_URL) + path);
         return createPageInstance(pageClass);
+    }
+
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     public abstract void closeBrowser();
