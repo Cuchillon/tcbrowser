@@ -36,15 +36,6 @@ public abstract class AbstractPage {
         return page;
     }
 
-    public static <T extends AbstractPage> String getPagePath(Class<T> pageClass) {
-        Optional<Page> annotation = Optional.ofNullable(pageClass.getAnnotation(Page.class));
-        if (annotation.isPresent()) {
-            return annotation.get().path();
-        } else {
-            throw new RuntimeException(pageClass.getCanonicalName() + " does not have Page annotation");
-        }
-    }
-
     public abstract boolean isOpened();
 
     public void setTextToField(WebElement element, String text) {
