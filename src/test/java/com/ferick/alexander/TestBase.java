@@ -41,7 +41,7 @@ public class TestBase {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void printTestResult(Method method, ITestResult result) throws Exception {
+    public void printTestResult(Method method, ITestResult result) {
         log.info("---------------------------------------");
         log.info(method.getDeclaringClass() + "." + method.getName() + " finished with RESULT " + result.getStatus());
         log.info("---------------------------------------");
