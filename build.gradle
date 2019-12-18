@@ -35,15 +35,15 @@ test {
     }
 
     if (project.hasProperty('browser')) {
-        System.setProperty('browser', "${browser}")
+        systemProperty 'browser', "${browser}"
     }
 
     if (project.hasProperty('orchestrator')) {
-        System.setProperty('orchestrator', "${orchestrator}")
+        systemProperty'orchestrator', "${orchestrator}"
     }
 
     if (project.hasProperty('record')) {
-        System.setProperty('record', "${record}")
+        systemProperty 'record', "${record}"
     }
 }
 
