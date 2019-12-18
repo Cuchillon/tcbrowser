@@ -32,10 +32,10 @@ public class TestBase {
     @BeforeMethod(alwaysRun = true)
     public void printTestName(Method method) {
         log.info("---------------------------------------");
-        log.info("TEST " + method.getDeclaringClass() + "." + method.getName() + " started.");
+        log.info("TEST {}.{} started.", method.getDeclaringClass(), method.getName());
 
         if (!method.getAnnotation(Test.class).description().equals("")) {
-            log.info("DESCRIPTION: " + method.getAnnotation(Test.class).description());
+            log.info("DESCRIPTION: {}", method.getAnnotation(Test.class).description());
         }
         log.info("---------------------------------------");
     }
@@ -43,7 +43,7 @@ public class TestBase {
     @AfterMethod(alwaysRun = true)
     public void printTestResult(Method method, ITestResult result) {
         log.info("---------------------------------------");
-        log.info(method.getDeclaringClass() + "." + method.getName() + " finished with RESULT " + result.getStatus());
+        log.info("{}.{} finished with RESULT {}", method.getDeclaringClass(), method.getName(), result.getStatus());
         log.info("---------------------------------------");
     }
 }
