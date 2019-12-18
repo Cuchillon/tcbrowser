@@ -28,22 +28,31 @@ public class MainPageTest extends TestBase {
 
     @Test(description = "Testing MainPage is open")
     public void mainPageOpenTest() {
+        log.info("Open site main page");
         MainPage mainPage = browser.openPage(MainPage.class);
+
+        log.info("Check site main page is open");
         assertTrue(mainPage.isOpened(), "MainPage is not open");
     }
 
     @Test(description = "Testing incorrect login from MainPage")
     public void incorrectLoginFromMainPageTest() {
+        log.info("Open site main page and login with incorrect user data");
         MainPage mainPage = browser.openPage(MainPage.class);
         LoginPage loginPage = mainPage.login(WRONG_AUTH, WRONG_PASSWORD);
+
+        log.info("Check login page is open and error message is displayed");
         assertTrue(loginPage.isOpened(), "LoginPage is not open");
         assertEquals(loginPage.getErrorMessage(), LOGIN_ERROR_MESSAGE_ENG, "Error message is not correct");
     }
 
     @Test(description = "Testing incorrect login from LoginPage")
     public void incorrectLoginFromLoginPageTest() {
+        log.info("Open login page and login with incorrect user data");
         LoginPage loginPage = browser.openPage(LoginPage.class);
         LoginPage returnedLoginPage = loginPage.incorrectLogin(WRONG_AUTH, WRONG_PASSWORD);
+
+        log.info("Check it returns to login page anew and error message is displayed");
         assertTrue(returnedLoginPage.isOpened(), "LoginPage is not open anew");
         assertEquals(loginPage.getErrorMessage(), LOGIN_ERROR_MESSAGE_ENG, "Error message is not correct");
     }
