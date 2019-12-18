@@ -4,6 +4,7 @@ import com.ferick.alexander.ApplicationManager;
 import com.ferick.alexander.Property;
 import com.ferick.alexander.pages.AbstractPage;
 import com.ferick.alexander.pages.Page;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class Browser {
 
     private WebDriver driver;
-    private ApplicationManager app;
+    protected ApplicationManager app;
 
     public Browser(ApplicationManager app) {
         this.app = app;
@@ -44,23 +45,27 @@ public abstract class Browser {
 
     public abstract void closeBrowser();
 
-    protected abstract WebDriver createWebDriver(String browserType);
+    protected abstract WebDriver createWebDriver();
 
     protected WebDriver getDriver() {
         return driver;
     }
 
-    protected ChromeOptions getChromeOptions() {
+    protected Capabilities getCapabilities() {
+        String browserType = System.getProperty("browser", BrowserType.CHROME);
+        return (browserType.equals(BrowserType.CHROME)) ? getChromeOptions() : getFirefoxOptions();
+    }
+
+    private ChromeOptions getChromeOptions() {
         return new ChromeOptions();
     }
 
-    protected FirefoxOptions getFirefoxOptions() {
+    private FirefoxOptions getFirefoxOptions() {
         return new FirefoxOptions();
     }
 
     private void configureWebDriver() {
-        String browserType = System.getProperty("browser", BrowserType.CHROME);
-        driver = createWebDriver(browserType);
+        driver = createWebDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
     }

@@ -1,13 +1,14 @@
 package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
+import com.ferick.alexander.Property;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.BrowserType;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import java.io.File;
 
-import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.*;
+import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL;
+import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_FAILING;
 
 public class TestContainerBrowser extends Browser {
 
@@ -18,25 +19,10 @@ public class TestContainerBrowser extends Browser {
     }
 
     @Override
-    protected WebDriver createWebDriver(String browserType) {
-        browserContainer = new BrowserWebDriverContainer();
-        String recordingMode = System.getProperty("record", "skip");
-
-        if (browserType.equals(BrowserType.FIREFOX)) {
-            browserContainer.withCapabilities(getFirefoxOptions());
-        }
-        else {
-            browserContainer.withCapabilities(getChromeOptions());
-        }
-
-        if (recordingMode.equals("all")) {
-            browserContainer.withRecordingMode(RECORD_ALL, new File("./build/"));
-        } else if (recordingMode.equals("fail")) {
-            browserContainer.withRecordingMode(RECORD_FAILING, new File("./build/"));
-        }
-
+    protected WebDriver createWebDriver() {
+        browserContainer = new BrowserWebDriverContainer().withCapabilities(getCapabilities());
+        setRecordingMode();
         browserContainer.start();
-
         return browserContainer.getWebDriver();
     }
 
@@ -47,6 +33,16 @@ public class TestContainerBrowser extends Browser {
                 getDriver().close();
             }
             browserContainer.stop();
+        }
+    }
+
+    private void setRecordingMode() {
+        String recordingMode = System.getProperty("record", "skip");
+        String recordPath = app.getProperty(Property.VNC_RECORD_PATH);
+        if (recordingMode.equals("all")) {
+            browserContainer.withRecordingMode(RECORD_ALL, new File(recordPath));
+        } else if (recordingMode.equals("fail")) {
+            browserContainer.withRecordingMode(RECORD_FAILING, new File(recordPath));
         }
     }
 }

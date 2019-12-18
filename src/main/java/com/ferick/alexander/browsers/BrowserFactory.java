@@ -18,8 +18,8 @@ public class BrowserFactory {
             case EnvType.TEST_CONTAINERS:
                 browser = new TestContainerBrowser(app);
                 break;
-            case EnvType.KUBERNETES:
-                browser = new KubernetesBrowser(app);
+            case EnvType.REMOTE:
+                browser = new RemoteBrowser(app);
                 break;
             default:
                 throw new IllegalStateException("Wrong environment type!");
