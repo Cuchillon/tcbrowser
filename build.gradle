@@ -34,17 +34,7 @@ test {
         listeners << 'org.uncommons.reportng.JUnitXMLReporter'
     }
 
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-
-    if (project.hasProperty('orchestrator')) {
-        systemProperty'orchestrator', "${orchestrator}"
-    }
-
-    if (project.hasProperty('record')) {
-        systemProperty 'record', "${record}"
-    }
+    loadProperties()
 }
 
 dependencies {    
@@ -63,4 +53,16 @@ dependencies {
 
 repositories {
     jcenter()
+}
+
+def loadProperties() {
+    def props = [:]
+    props.put('browser', findProperty('browser') ?: '')
+    props.put('orchestrator', findProperty('orchestrator') ?: '')
+    props.put('record', findProperty('record') ?: '')
+    props.forEach {key, value ->
+        if (value != '') {
+            test.systemProperty("${key}", "${value}")
+        }
+    }
 }
