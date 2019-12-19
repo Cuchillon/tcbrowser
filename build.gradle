@@ -46,6 +46,8 @@ dependencies {
     compile 'org.testcontainers:selenium:1.12.2'
     compile 'com.google.inject:guice:4.0-beta5'
     compile 'io.qameta.allure:allure-testng:2.7.0'
+    compile 'org.apache.commons:commons-configuration2:2.6'
+    compile 'commons-beanutils:commons-beanutils:1.9.4'
     testCompile 'org.testng:testng:6.10'
     testCompile 'ch.qos.logback:logback-classic:1.2.3'
     testCompile("org.uncommons:reportng:1.1.4") { exclude group: "org.testng", module: "testng" }
@@ -57,9 +59,14 @@ repositories {
 
 def loadProperties() {
     def props = [:]
-    props.put('browser', findProperty('browser') ?: '')
-    props.put('orchestrator', findProperty('orchestrator') ?: '')
-    props.put('record', findProperty('record') ?: '')
+    props.put('ui.base.url', findProperty('ui.base.url') ?: '')
+    props.put('selenium.server.host', findProperty('selenium.server.host') ?: '')
+    props.put('selenium.server.port', findProperty('selenium.server.port') ?: '')
+    props.put('selenium.server.path', findProperty('selenium.server.path') ?: '')
+    props.put('test.env.type', findProperty('test.env.type') ?: '')
+    props.put('browser.type', findProperty('browser.type') ?: '')
+    props.put('vnc.record.mode', findProperty('vnc.record.mode') ?: '')
+    props.put('vnc.record.path', findProperty('vnc.record.path') ?: '')
     props.forEach {key, value ->
         if (value != '') {
             test.systemProperty("${key}", "${value}")

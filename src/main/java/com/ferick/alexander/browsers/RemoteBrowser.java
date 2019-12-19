@@ -1,7 +1,7 @@
 package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
-import com.ferick.alexander.Property;
+import com.ferick.alexander.config.Config;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -11,9 +11,7 @@ import java.net.URL;
 public class RemoteBrowser extends Browser {
 
     private final String seleniumServerUrl = String.format("http://%s:%s%s",
-            app.getProperty(Property.SELENIUM_SERVER_HOST),
-            app.getProperty(Property.SELENIUM_SERVER_PORT),
-            app.getProperty(Property.SELENIUM_SERVER_PATH));
+            Config.SELENIUM_SERVER_HOST, Config.SELENIUM_SERVER_PORT, Config.SELENIUM_SERVER_PATH);
 
     public RemoteBrowser(ApplicationManager app) {
         super(app);

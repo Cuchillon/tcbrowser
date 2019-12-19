@@ -1,6 +1,7 @@
 package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
+import com.ferick.alexander.config.Config;
 
 public class BrowserFactory {
 
@@ -12,9 +13,8 @@ public class BrowserFactory {
 
     public Browser getBrowser() {
         Browser browser;
-        String envType = System.getProperty("orchestrator", EnvType.TEST_CONTAINERS);
 
-        switch (envType) {
+        switch (Config.TEST_ENV_TYPE) {
             case EnvType.TEST_CONTAINERS:
                 browser = new TestContainerBrowser(app);
                 break;
