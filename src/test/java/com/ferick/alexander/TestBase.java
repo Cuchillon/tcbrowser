@@ -2,8 +2,6 @@ package com.ferick.alexander;
 
 import com.ferick.alexander.listeners.TestListener;
 import com.ferick.alexander.tools.AllureLogger;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
