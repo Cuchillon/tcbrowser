@@ -12,17 +12,17 @@ import org.slf4j.LoggerFactory;
 
 public class ConfigLoader {
 
-    private static final Logger log = LoggerFactory.getLogger(ConfigLoader.class);
     private static final String PROPERTIES_FILE_NAME = "local.properties";
-    private static ClassLoader classLoader = ConfigLoader.class.getClassLoader();
 
-    private static CombinedConfiguration configuration = loadConfigurations();
+    private final Logger log = LoggerFactory.getLogger(ConfigLoader.class);
+    private ClassLoader classLoader = ConfigLoader.class.getClassLoader();
+    private CombinedConfiguration configuration = loadConfigurations();
 
-    public static CombinedConfiguration getConfiguration() {
+    public CombinedConfiguration getConfiguration() {
         return configuration;
     }
 
-    private static CombinedConfiguration loadConfigurations() {
+    private CombinedConfiguration loadConfigurations() {
         Parameters params = new Parameters();
 
         FileBasedConfigurationBuilder<FileBasedConfiguration> localProperties =

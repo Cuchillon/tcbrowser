@@ -1,7 +1,7 @@
 package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
-import com.ferick.alexander.config.Config;
+import com.ferick.alexander.config.Property;
 
 public class BrowserFactory {
 
@@ -14,7 +14,7 @@ public class BrowserFactory {
     public Browser getBrowser() {
         Browser browser;
 
-        switch (Config.TEST_ENV_TYPE) {
+        switch (app.getProperty(Property.TEST_ENV_TYPE)) {
             case EnvType.TEST_CONTAINERS:
                 browser = new TestContainerBrowser(app);
                 break;

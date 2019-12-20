@@ -1,7 +1,7 @@
 package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
-import com.ferick.alexander.config.Config;
+import com.ferick.alexander.config.Property;
 import org.openqa.selenium.WebDriver;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 
@@ -38,8 +38,8 @@ public class TestContainerBrowser extends Browser {
     }
 
     private void setRecordingMode() {
-        String recordingMode = Config.VNC_RECORD_MODE;
-        String recordPath = Config.VNC_RECORD_PATH;
+        String recordingMode = app.getProperty(Property.VNC_RECORD_MODE);
+        String recordPath = app.getProperty(Property.VNC_RECORD_PATH);
         if (recordingMode.equals("all")) {
             browserContainer.withRecordingMode(RECORD_ALL, new File(recordPath));
         } else if (recordingMode.equals("fail")) {

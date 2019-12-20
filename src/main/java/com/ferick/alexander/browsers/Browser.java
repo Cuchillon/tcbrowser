@@ -1,7 +1,7 @@
 package com.ferick.alexander.browsers;
 
 import com.ferick.alexander.ApplicationManager;
-import com.ferick.alexander.config.Config;
+import com.ferick.alexander.config.Property;
 import com.ferick.alexander.pages.AbstractPage;
 import com.ferick.alexander.pages.Page;
 import org.openqa.selenium.Capabilities;
@@ -31,7 +31,7 @@ public abstract class Browser {
     }
 
     public <T extends AbstractPage> T openPage(Class<T> pageClass, String path) {
-        driver.get(Config.UI_BASE_URL + path);
+        driver.get(app.getProperty(Property.UI_BASE_URL) + path);
         return AbstractPage.createPageInstance(pageClass, driver);
     }
 
@@ -52,7 +52,9 @@ public abstract class Browser {
     }
 
     protected Capabilities getCapabilities() {
-        return (Config.BROWSER_TYPE.equals(BrowserType.CHROME)) ? getChromeOptions() : getFirefoxOptions();
+        return (app.getProperty(Property.BROWSER_TYPE).equals(BrowserType.CHROME))
+                ? getChromeOptions()
+                : getFirefoxOptions();
     }
 
     private ChromeOptions getChromeOptions() {
