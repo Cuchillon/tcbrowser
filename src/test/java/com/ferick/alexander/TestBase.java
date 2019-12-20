@@ -1,6 +1,7 @@
 package com.ferick.alexander;
 
 import com.ferick.alexander.listeners.TestListener;
+import com.ferick.alexander.tools.AllureLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
@@ -16,7 +17,7 @@ import java.lang.reflect.Method;
 @Listeners(TestListener.class)
 public class TestBase {
 
-    protected final Logger log = LoggerFactory.getLogger(TestBase.class);
+    protected final AllureLogger log = new AllureLogger(TestBase.class);
 
     protected ApplicationManager app;
 
@@ -32,10 +33,10 @@ public class TestBase {
     @BeforeMethod(alwaysRun = true)
     public void printTestName(Method method) {
         log.info("---------------------------------------");
-        log.info("TEST {}.{} started.", method.getDeclaringClass(), method.getName());
+        log.info(String.format("TEST %s.%s started.", method.getDeclaringClass(), method.getName()));
 
         if (!method.getAnnotation(Test.class).description().equals("")) {
-            log.info("DESCRIPTION: {}", method.getAnnotation(Test.class).description());
+            log.info(String.format("DESCRIPTION: %s", method.getAnnotation(Test.class).description()));
         }
         log.info("---------------------------------------");
     }
@@ -43,7 +44,8 @@ public class TestBase {
     @AfterMethod(alwaysRun = true)
     public void printTestResult(Method method, ITestResult result) {
         log.info("---------------------------------------");
-        log.info("{}.{} finished with RESULT {}", method.getDeclaringClass(), method.getName(), result.getStatus());
+        log.info(String.format("%s.%s finished with RESULT %d",
+                method.getDeclaringClass(), method.getName(), result.getStatus()));
         log.info("---------------------------------------");
     }
 }
