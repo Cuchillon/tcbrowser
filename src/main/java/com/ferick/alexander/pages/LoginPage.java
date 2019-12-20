@@ -28,21 +28,12 @@ public class LoginPage extends AbstractPage {
         return elementWait.isElementDisplayed(signInButton);
     }
 
-    public MainPage login(String auth, String password) {
-        setLoginData(auth, password);
-        return createPageInstance(MainPage.class, driver);
-    }
-
-    public LoginPage incorrectLogin(String auth, String password) {
-        setLoginData(auth, password);
-        return createPageInstance(LoginPage.class, driver);
-    }
-
     public String getErrorMessage() {
         return errorMessageForm.getText();
     }
 
-    private void setLoginData(String auth, String password) {
+    @Override
+    protected void setLoginData(String auth, String password) {
         setTextToField(authField, auth);
         setTextToField(passwordField, password);
         signInButton.click();

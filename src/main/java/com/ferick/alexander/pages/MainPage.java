@@ -31,11 +31,11 @@ public class MainPage extends AbstractPage {
         return elementWait.isElementDisplayed(registerButton);
     }
 
-    public LoginPage login(String auth, String password) {
+    @Override
+    protected void setLoginData(String auth, String password) {
         userSignIn.click();
         setTextToField(authField, auth);
         setTextToField(passwordField, password);
         signInButton.click();
-        return createPageInstance(LoginPage.class, driver);
     }
 }

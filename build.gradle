@@ -67,6 +67,8 @@ def loadProperties() {
     props.put('browser.type', findProperty('browser.type') ?: '')
     props.put('vnc.record.mode', findProperty('vnc.record.mode') ?: '')
     props.put('vnc.record.path', findProperty('vnc.record.path') ?: '')
+    props.put('test.user.auth', findProperty('test.user.auth') ?: '')
+    props.put('test.user.password', findProperty('test.user.password') ?: '')
     props.forEach {key, value ->
         if (value != '') {
             test.systemProperty("${key}", "${value}")

@@ -39,7 +39,7 @@ public class MainPageTest extends TestBase {
     public void incorrectLoginFromMainPageTest() {
         log.info("Open site main page and login with incorrect user data");
         MainPage mainPage = browser.openPage(MainPage.class);
-        LoginPage loginPage = mainPage.login(WRONG_AUTH, WRONG_PASSWORD);
+        LoginPage loginPage = mainPage.incorrectLogin(WRONG_AUTH, WRONG_PASSWORD);
 
         log.info("Check login page is open and error message is displayed");
         assertTrue(loginPage.isOpened(), "LoginPage is not open");
