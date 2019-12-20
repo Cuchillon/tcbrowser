@@ -10,17 +10,13 @@ import java.net.URL;
 
 public class RemoteBrowser extends Browser {
 
-    private final String seleniumServerUrl = String.format("http://%s:%s%s",
-            app.getProperty(Property.SELENIUM_SERVER_HOST),
-            app.getProperty(Property.SELENIUM_SERVER_PORT),
-            app.getProperty(Property.SELENIUM_SERVER_PATH));
-
     public RemoteBrowser(ApplicationManager app) {
         super(app);
     }
 
     @Override
     protected WebDriver createWebDriver() {
+        String seleniumServerUrl = getSeleniumServerUrl();
         RemoteWebDriver driver;
         try {
             driver = new RemoteWebDriver(new URL(seleniumServerUrl), getCapabilities());
@@ -35,5 +31,12 @@ public class RemoteBrowser extends Browser {
         if (getDriver() != null) {
             getDriver().close();
         }
+    }
+
+    private String getSeleniumServerUrl() {
+        return String.format("http://%s:%s%s",
+                app.getProperty(Property.SELENIUM_SERVER_HOST),
+                app.getProperty(Property.SELENIUM_SERVER_PORT),
+                app.getProperty(Property.SELENIUM_SERVER_PATH));
     }
 }
