@@ -9,7 +9,9 @@ public enum Property {
     TEST_ENV_TYPE("test.env.type"),
     BROWSER_TYPE("browser.type"),
     VNC_RECORD_MODE("vnc.record.mode"),
-    VNC_RECORD_PATH("vnc.record.path");
+    VNC_RECORD_PATH("vnc.record.path"),
+    TEST_USER_AUTH("test.user.auth"),
+    TEST_USER_PASSWORD("test.user.password");
 
     private String propertyName;
 

@@ -22,13 +22,23 @@ public class MainPage extends AbstractPage {
     @FindBy(id = "elSignIn_submit")
     private WebElement signInButton;
 
+    @FindBy(id = "elUserLink")
+    private WebElement userLink;
+
+    @FindBy(xpath = "//*[@id='ipsLayout_mainArea']//*[@class='ipsType_pageTitle']")
+    private WebElement startForm;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public boolean isOpened() {
-        return elementWait.isElementDisplayed(registerButton);
+        return elementWait.isElementDisplayed(startForm);
+    }
+
+    public boolean isUserLoggedIn() {
+        return elementWait.isElementDisplayed(userLink);
     }
 
     @Override

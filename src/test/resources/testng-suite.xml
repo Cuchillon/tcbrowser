@@ -7,7 +7,7 @@
     </listeners>
     <test name="Browser tests">
         <classes>
-            <class name="com.ferick.alexander.MainPageTest"/>
+            <class name="com.ferick.alexander.SiteLoginTest"/>
         </classes>
     </test>
 </suite>
