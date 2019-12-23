@@ -7,6 +7,7 @@ import com.ferick.alexander.pages.MainPage;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -18,6 +19,8 @@ public class SiteLoginTest extends TestBase {
             "не принадлежит ни к одному аккаунту. Убедитесь в правильности введённой информации.";
     private static final String LOGIN_ERROR_MESSAGE_ENG = "The display name or password was incorrect. " +
             "Please try again (make sure your caps lock is off).";
+    private static final String PASSWORD_ERROR_MESSAGE_RUS = "Введенный вами пароль недействителен. Пожалуйста, " +
+            "попробуйте еще раз (убедитесь, что режим Caps Lock выключен).";
     private static final String WRONG_AUTH = "wrong_auth";
     private static final String WRONG_PASSWORD = "wrong_password";
 
@@ -74,11 +77,11 @@ public class SiteLoginTest extends TestBase {
         assertEquals(loginPage.getErrorMessage(), LOGIN_ERROR_MESSAGE_ENG, "Error message is not correct");
     }
 
-    @Test(description = "Testing incorrect login from LoginPage")
-    public void incorrectLoginFromLoginPageTest() {
+    @Test(description = "Testing incorrect login from LoginPage", dataProvider = "Login data")
+    public void incorrectLoginFromLoginPageTest(String auth, String password) {
         log.info("Open login page and log in with incorrect user data");
         LoginPage loginPage = browser.openPage(LoginPage.class);
-        LoginPage returnedLoginPage = loginPage.incorrectLogin(WRONG_AUTH, WRONG_PASSWORD);
+        LoginPage returnedLoginPage = loginPage.incorrectLogin(auth, password);
 
         log.info("Check it returns to login page anew and error message is displayed");
         assertTrue(returnedLoginPage.isOpened(), "LoginPage is not open anew");
@@ -93,5 +96,17 @@ public class SiteLoginTest extends TestBase {
     @AfterClass
     public void tearDown() {
         browser.closeBrowser();
+    }
+
+    @DataProvider(name = "Login data")
+    private Object[][] setLoginData() {
+        return new Object[][] {
+                {WRONG_AUTH, WRONG_PASSWORD},
+                {app.getProperty(Property.TEST_USER_AUTH), WRONG_PASSWORD},
+                {WRONG_AUTH, app.getProperty(Property.TEST_USER_PASSWORD)},
+                {app.getProperty(Property.TEST_USER_AUTH), ""},
+                {"", app.getProperty(Property.TEST_USER_PASSWORD)},
+                {"", ""}
+        };
     }
 }
