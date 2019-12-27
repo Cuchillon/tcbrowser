@@ -1,13 +1,16 @@
 package com.ferick.alexander;
 
+import com.ferick.alexander.browsers.Browser;
 import com.ferick.alexander.listeners.TestListener;
 import com.ferick.alexander.tools.AllureLogger;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
@@ -18,14 +21,14 @@ public class TestBase {
     protected final AllureLogger log = new AllureLogger(TestBase.class);
 
     protected ApplicationManager app;
+    protected Browser browser;
 
-    public TestBase() {
+    @Parameters("browser")
+    @BeforeTest
+    public void globalSetUp(String browser, ITestContext context) {
         app = new ApplicationManager();
-    }
-
-    @BeforeSuite
-    public void globalSetUp(ITestContext context) {
-        context.setAttribute("app", app);
+        this.browser = app.browser(browser);
+        context.setAttribute("browser", this.browser);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -45,5 +48,10 @@ public class TestBase {
         log.info(String.format("%s.%s finished with RESULT %d",
                 method.getDeclaringClass(), method.getName(), result.getStatus()));
         log.info("---------------------------------------");
+    }
+
+    @AfterTest
+    public void tearDown() {
+        browser.closeBrowser();
     }
 }

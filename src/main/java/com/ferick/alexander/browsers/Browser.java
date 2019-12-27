@@ -17,11 +17,13 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Browser {
 
-    private WebDriver driver;
     protected ApplicationManager app;
+    private WebDriver driver;
+    private String browserType = "";
 
-    public Browser(ApplicationManager app) {
+    public Browser(ApplicationManager app, String browserType) {
         this.app = app;
+        this.browserType = browserType;
         configureWebDriver();
     }
 
@@ -52,7 +54,10 @@ public abstract class Browser {
     }
 
     protected Capabilities getCapabilities() {
-        return (app.getProperty(Property.BROWSER_TYPE).equals(BrowserType.CHROME))
+        String browserTypeForCapabilities = (!browserType.isEmpty())
+                ? browserType
+                : app.getProperty(Property.BROWSER_TYPE);
+        return (browserTypeForCapabilities.equals(BrowserType.CHROME))
                 ? getChromeOptions()
                 : getFirefoxOptions();
     }

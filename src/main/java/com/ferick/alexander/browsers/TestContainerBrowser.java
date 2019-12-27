@@ -15,8 +15,8 @@ public class TestContainerBrowser extends Browser {
 
     private BrowserWebDriverContainer browserContainer;
 
-    public TestContainerBrowser(ApplicationManager app) {
-        super(app);
+    public TestContainerBrowser(ApplicationManager app, String browserType) {
+        super(app, browserType);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.ferick.alexander.listeners;
 
-import com.ferick.alexander.ApplicationManager;
+import com.ferick.alexander.browsers.Browser;
 import io.qameta.allure.Attachment;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -19,9 +19,9 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        ApplicationManager app =
-                (ApplicationManager) result.getTestContext().getAttribute("app");
-        saveScreenshot(app.browser().takeScreenshot());
+        Browser browser =
+                (Browser) result.getTestContext().getAttribute("browser");
+        saveScreenshot(browser.takeScreenshot());
     }
 
     @Override

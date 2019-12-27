@@ -10,8 +10,8 @@ import java.net.URL;
 
 public class RemoteBrowser extends Browser {
 
-    public RemoteBrowser(ApplicationManager app) {
-        super(app);
+    public RemoteBrowser(ApplicationManager app, String browserType) {
+        super(app, browserType);
     }
 
     @Override

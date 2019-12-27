@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="TCBrowser">
+<suite name="TCBrowser" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
     </listeners>
-    <test name="Browser tests">
+    <test name="Browser tests Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.ferick.alexander.SiteLoginTest"/>
+        </classes>
+    </test>
+    <test name="Browser tests Firefox">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="com.ferick.alexander.SiteLoginTest"/>
         </classes>

@@ -19,9 +19,9 @@ public class ApplicationManager {
         return config.getString(property.getPropertyName());
     }
 
-    public Browser browser() {
+    public Browser browser(String browserType) {
         if (browser == null) {
-            browser = new BrowserFactory(this).getBrowser();
+            browser = new BrowserFactory(this).getBrowser(browserType);
         }
         return browser;
     }
