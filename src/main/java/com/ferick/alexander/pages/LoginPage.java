@@ -1,23 +1,25 @@
 package com.ferick.alexander.pages;
 
+import com.ferick.alexander.elements.Button;
+import com.ferick.alexander.elements.Input;
+import com.ferick.alexander.elements.Label;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Page(path = "/login/")
 public class LoginPage extends AbstractPage {
 
     @FindBy(id = "auth")
-    private WebElement authField;
+    private Input authField;
 
     @FindBy(id = "password")
-    private WebElement passwordField;
+    private Input passwordField;
 
     @FindBy(id = "elSignIn_submit")
-    private WebElement signInButton;
+    private Button signInButton;
 
     @FindBy(xpath = "//*[@id='ipsLayout_mainArea']//*[contains(@class,'ipsMessage_error')]")
-    private WebElement errorMessageForm;
+    private Label errorMessageForm;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -25,7 +27,7 @@ public class LoginPage extends AbstractPage {
 
     @Override
     public boolean isOpened() {
-        return elementWait.isElementDisplayed(signInButton);
+        return signInButton.isDisplayed();
     }
 
     public String getErrorMessage() {
@@ -34,8 +36,8 @@ public class LoginPage extends AbstractPage {
 
     @Override
     protected void setLoginData(String auth, String password) {
-        setTextToField(authField, auth);
-        setTextToField(passwordField, password);
+        authField.setText(auth);
+        passwordField.setText(password);
         signInButton.click();
     }
 }

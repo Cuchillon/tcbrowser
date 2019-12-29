@@ -1,32 +1,28 @@
 package com.ferick.alexander.pages;
 
+import com.ferick.alexander.elements.Button;
+import com.ferick.alexander.elements.Label;
+import com.ferick.alexander.elements.UserSignInMenu;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Page(path = "/")
 public class MainPage extends AbstractPage {
 
     @FindBy(id = "elRegisterButton")
-    private WebElement registerButton;
+    private Button registerButton;
 
     @FindBy(id = "elUserSignIn")
-    private WebElement userSignIn;
-
-    @FindBy(name = "auth")
-    private WebElement authField;
-
-    @FindBy(name = "password")
-    private WebElement passwordField;
-
-    @FindBy(id = "elSignIn_submit")
-    private WebElement signInButton;
+    private Button userSignIn;
 
     @FindBy(id = "elUserLink")
-    private WebElement userLink;
+    private Button userLink;
 
     @FindBy(xpath = "//*[@id='ipsLayout_mainArea']//*[@class='ipsType_pageTitle']")
-    private WebElement startForm;
+    private Label startForm;
+
+    @FindBy(id = "elUserSignIn_menu")
+    private UserSignInMenu userSignInMenu;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -34,18 +30,16 @@ public class MainPage extends AbstractPage {
 
     @Override
     public boolean isOpened() {
-        return elementWait.isElementDisplayed(startForm);
+        return startForm.isDisplayed();
     }
 
     public boolean isUserLoggedIn() {
-        return elementWait.isElementDisplayed(userLink);
+        return userLink.isDisplayed();
     }
 
     @Override
     protected void setLoginData(String auth, String password) {
         userSignIn.click();
-        setTextToField(authField, auth);
-        setTextToField(passwordField, password);
-        signInButton.click();
+        userSignInMenu.login(auth, password);
     }
 }

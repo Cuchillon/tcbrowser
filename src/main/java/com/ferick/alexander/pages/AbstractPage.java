@@ -1,8 +1,7 @@
 package com.ferick.alexander.pages;
 
-import com.ferick.alexander.utils.ElementWait;
+import com.ferick.alexander.elements.ElementFieldDecorator;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import java.lang.reflect.Constructor;
@@ -10,12 +9,10 @@ import java.lang.reflect.Constructor;
 public abstract class AbstractPage {
 
     protected WebDriver driver;
-    protected ElementWait elementWait;
 
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
-        elementWait = new ElementWait(driver);
+        PageFactory.initElements(new ElementFieldDecorator(driver), this);
     }
 
     public static <T extends AbstractPage> T createPageInstance(Class<T> pageClass, WebDriver driver) {
@@ -36,11 +33,6 @@ public abstract class AbstractPage {
     }
 
     public abstract boolean isOpened();
-
-    public void setTextToField(WebElement element, String text) {
-        element.clear();
-        element.sendKeys(text);
-    }
 
     public MainPage login(String auth, String password) {
         setLoginData(auth, password);
