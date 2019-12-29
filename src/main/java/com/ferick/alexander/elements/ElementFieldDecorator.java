@@ -1,7 +1,9 @@
 package com.ferick.alexander.elements;
 
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -18,6 +20,11 @@ public class ElementFieldDecorator extends DefaultFieldDecorator {
         this.driver = driver;
     }
 
+    private ElementFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
+        super(new DefaultElementLocatorFactory(searchContext));
+        this.driver = driver;
+    }
+
     @Override
     public Object decorate(ClassLoader loader, Field field) {
         if (BaseElement.class.isAssignableFrom(field.getType())) {
@@ -28,7 +35,11 @@ public class ElementFieldDecorator extends DefaultFieldDecorator {
 
     private Object decorateElement(final ClassLoader loader, final Field field) {
         final WebElement webElement = proxyForLocator(loader, createLocator(field));
-        return createInstance(field.getType(), webElement);
+        Object instance = createInstance(field.getType(), webElement);
+        if (Container.class.isAssignableFrom(instance.getClass())) {
+            PageFactory.initElements(new ElementFieldDecorator(webElement, driver), instance);
+        }
+        return instance;
     }
 
     private ElementLocator createLocator(final Field field) {
