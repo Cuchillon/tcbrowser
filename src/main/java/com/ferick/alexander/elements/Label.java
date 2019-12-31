@@ -8,12 +8,4 @@ public class Label extends BaseElement {
     public Label(WebDriver driver, WebElement element) {
         super(driver, element);
     }
-
-    public String getText() {
-        return element.getText();
-    }
-
-    public String waitAndGetText() {
-        return wait.until(driver -> element.getText());
-    }
 }

@@ -8,6 +8,7 @@
     <test name="Browser tests">
         <classes>
             <class name="com.ferick.alexander.SiteLoginTest"/>
+            <class name="com.ferick.alexander.ActiveTopicsTest"/>
         </classes>
     </test>
 </suite>
