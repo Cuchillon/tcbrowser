@@ -31,4 +31,16 @@ public abstract class BaseElement {
     public boolean isDisplayed() {
         return wait.until(driver -> element.isDisplayed());
     }
+
+    public String getText() {
+        return element.getText();
+    }
+
+    public String waitAndGetText() {
+        return wait.until(driver -> element.getText());
+    }
+
+    public String getAttribute(String attributeName) {
+        return wait.until(driver -> element.getAttribute(attributeName));
+    }
 }

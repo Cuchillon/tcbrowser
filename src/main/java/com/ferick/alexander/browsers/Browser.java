@@ -43,6 +43,10 @@ public abstract class Browser {
         driver.manage().deleteAllCookies();
     }
 
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
     public abstract void closeBrowser();
 
     protected abstract WebDriver createWebDriver();
