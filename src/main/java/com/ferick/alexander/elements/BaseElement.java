@@ -11,7 +11,7 @@ public abstract class BaseElement {
     private static final long DEFAULT_TIMEOUT = 10;
 
     protected final WebElement element;
-    private WebDriverWait wait;
+    protected final WebDriverWait wait;
 
     public BaseElement(WebDriver driver, WebElement element) {
         this.element = element;

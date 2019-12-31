@@ -12,4 +12,8 @@ public class Label extends BaseElement {
     public String getText() {
         return element.getText();
     }
+
+    public String waitAndGetText() {
+        return wait.until(driver -> element.getText());
+    }
 }
