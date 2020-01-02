@@ -21,6 +21,9 @@ public class BrowserFactory {
             case EnvType.REMOTE:
                 browser = new RemoteBrowser(app);
                 break;
+            case EnvType.LOCAL:
+                browser = new LocalBrowser(app);
+                break;
             default:
                 throw new IllegalStateException("Wrong environment type!");
         }
