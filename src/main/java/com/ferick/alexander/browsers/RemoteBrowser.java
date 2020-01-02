@@ -16,12 +16,11 @@ public class RemoteBrowser extends Browser {
 
     @Override
     protected WebDriver createWebDriver() {
-        String seleniumServerUrl = getSeleniumServerUrl();
         RemoteWebDriver driver;
         try {
-            driver = new RemoteWebDriver(new URL(seleniumServerUrl), getCapabilities());
+            driver = new RemoteWebDriver(getSeleniumServerUrl(), getCapabilities());
         } catch (MalformedURLException e) {
-            throw new RuntimeException("Exception on creating instance of WebDriver with URL " + seleniumServerUrl, e);
+            throw new RuntimeException("Exception on creating instance of RemoteWebDriver", e);
         }
         return driver;
     }
@@ -33,10 +32,11 @@ public class RemoteBrowser extends Browser {
         }
     }
 
-    private String getSeleniumServerUrl() {
-        return String.format("http://%s:%s%s",
+    protected URL getSeleniumServerUrl() throws MalformedURLException {
+        String seleniumServerUrl = String.format("http://%s:%s%s",
                 app.getProperty(Property.SELENIUM_SERVER_HOST),
                 app.getProperty(Property.SELENIUM_SERVER_PORT),
                 app.getProperty(Property.SELENIUM_SERVER_PATH));
+        return new URL(seleniumServerUrl);
     }
 }
