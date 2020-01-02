@@ -12,13 +12,13 @@ public class ActiveTopics extends Container {
     public static class DataItem extends Container {
 
         @FindBy(xpath = "./*[@class='ipsDataItem_main']/a")
-        private Button linkButton;
+        private LinkButton linkButton;
 
         public DataItem(WebDriver driver, WebElement element) {
             super(driver, element);
         }
 
-        public Button getLinkButton() {
+        public LinkButton getLinkButton() {
             return linkButton;
         }
     }

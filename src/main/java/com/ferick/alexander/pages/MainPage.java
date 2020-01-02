@@ -1,9 +1,6 @@
 package com.ferick.alexander.pages;
 
-import com.ferick.alexander.elements.ActiveTopics;
-import com.ferick.alexander.elements.Button;
-import com.ferick.alexander.elements.Label;
-import com.ferick.alexander.elements.UserSignInMenu;
+import com.ferick.alexander.elements.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -14,10 +11,10 @@ public class MainPage extends AbstractPage {
     private Button registerButton;
 
     @FindBy(id = "elUserSignIn")
-    private Button userSignIn;
+    private LinkButton userSignIn;
 
     @FindBy(id = "elUserLink")
-    private Button userLink;
+    private LinkButton userLink;
 
     @FindBy(xpath = "//*[@id='ipsLayout_mainArea']//*[@class='ipsType_pageTitle']")
     private Label startForm;
@@ -50,7 +47,7 @@ public class MainPage extends AbstractPage {
                 .getDataList()
                 .get(topicNumber)
                 .getLinkButton()
-                .getAttribute("href");
+                .getLink();
     }
 
     public void passToTopicContent(int topicNumber) {
