@@ -21,9 +21,7 @@ public class LocalBrowser extends RemoteBrowser {
 
     @Override
     public void closeBrowser() {
-        if (getDriver() != null) {
-            getDriver().quit();
-        }
+        super.closeBrowser();
         if (driverService != null && driverService.isRunning()) {
             driverService.stop();
         }

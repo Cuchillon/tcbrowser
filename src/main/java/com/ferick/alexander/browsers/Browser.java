@@ -10,8 +10,11 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -62,11 +65,19 @@ public abstract class Browser {
     }
 
     private ChromeOptions getChromeOptions() {
-        return new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
+        Map<String, Object> preferences = new HashMap<>();
+        preferences.put("intl.accept_languages", "en");
+        options.setExperimentalOption("prefs", preferences);
+        return options;
     }
 
     private FirefoxOptions getFirefoxOptions() {
-        return new FirefoxOptions();
+        FirefoxOptions options = new FirefoxOptions();
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference("intl.accept_languages", "en");
+        options.setProfile(profile);
+        return options;
     }
 
     private void configureWebDriver() {
