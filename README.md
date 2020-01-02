@@ -1,6 +1,6 @@
-#### Training project for testing GUI two ways - with testContainers or with Kubernetes
+#### Training project for testing GUI three ways - locally, with testContainers or with Kubernetes
 
-Tests can be run using either testContainers or remote selenium server.
+Tests can be run either on local PC, or using testContainers, or via CI/CD tool using remote selenium server.
 
 Parameters can be set via gradle (-Pname=value) or in src/main/resources/local.properties. Passed via gradle have more priority.
 
