@@ -9,7 +9,7 @@ Parameters can be set via gradle (-Pname=value) or in src/main/resources/local.p
 * selenium.server.host
 * selenium.server.port
 * selenium.server.path
-* test.env.type - *Environment where to run tests - 'test-containers' or 'remote'*
+* test.env.type - *Environment where to run tests - 'local', 'test-containers' or 'remote'*
 * browser.type - *Browser type - 'chrome' or 'firefox'*
 * vnc.record.mode - *TestContainers VNC video records settings - 'skip', 'all' or 'fail'*
 * vnc.record.path
