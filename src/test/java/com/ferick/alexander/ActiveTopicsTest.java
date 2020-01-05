@@ -1,7 +1,7 @@
 package com.ferick.alexander;
 
 import com.ferick.alexander.browsers.Browser;
-import com.ferick.alexander.pages.MainPage;
+import com.ferick.alexander.pages.entrance.MainPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

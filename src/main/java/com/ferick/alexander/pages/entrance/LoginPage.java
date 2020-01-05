@@ -1,13 +1,14 @@
-package com.ferick.alexander.pages;
+package com.ferick.alexander.pages.entrance;
 
-import com.ferick.alexander.elements.Button;
-import com.ferick.alexander.elements.Input;
-import com.ferick.alexander.elements.Label;
+import com.ferick.alexander.elements.singles.Button;
+import com.ferick.alexander.elements.singles.Input;
+import com.ferick.alexander.elements.singles.Label;
+import com.ferick.alexander.pages.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @Page(path = "/login/")
-public class LoginPage extends AbstractPage {
+public class LoginPage extends AbstractLoginPage {
 
     @FindBy(id = "auth")
     private Input authField;

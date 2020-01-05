@@ -2,8 +2,8 @@ package com.ferick.alexander;
 
 import com.ferick.alexander.browsers.Browser;
 import com.ferick.alexander.config.Property;
-import com.ferick.alexander.pages.LoginPage;
-import com.ferick.alexander.pages.MainPage;
+import com.ferick.alexander.pages.entrance.LoginPage;
+import com.ferick.alexander.pages.entrance.MainPage;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;

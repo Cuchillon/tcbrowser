@@ -33,16 +33,4 @@ public abstract class AbstractPage {
     }
 
     public abstract boolean isOpened();
-
-    public MainPage login(String auth, String password) {
-        setLoginData(auth, password);
-        return createPageInstance(MainPage.class, driver);
-    }
-
-    public LoginPage incorrectLogin(String auth, String password) {
-        setLoginData(auth, password);
-        return createPageInstance(LoginPage.class, driver);
-    }
-
-    protected abstract void setLoginData(String auth, String password);
 }

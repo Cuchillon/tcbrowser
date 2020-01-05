@@ -1,5 +1,6 @@
-package com.ferick.alexander.elements;
+package com.ferick.alexander.elements.containers;
 
+import com.ferick.alexander.elements.BaseElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

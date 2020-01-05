@@ -1,11 +1,16 @@
-package com.ferick.alexander.pages;
+package com.ferick.alexander.pages.entrance;
 
-import com.ferick.alexander.elements.*;
+import com.ferick.alexander.elements.containers.ActiveTopics;
+import com.ferick.alexander.elements.containers.UserSignInMenu;
+import com.ferick.alexander.elements.singles.Button;
+import com.ferick.alexander.elements.singles.Label;
+import com.ferick.alexander.elements.singles.LinkButton;
+import com.ferick.alexander.pages.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @Page(path = "/")
-public class MainPage extends AbstractPage {
+public class MainPage extends AbstractLoginPage {
 
     @FindBy(id = "elRegisterButton")
     private Button registerButton;

@@ -1,5 +1,7 @@
-package com.ferick.alexander.elements;
+package com.ferick.alexander.elements.containers;
 
+import com.ferick.alexander.elements.ElementList;
+import com.ferick.alexander.elements.singles.LinkButton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
