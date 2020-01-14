@@ -1,12 +1,8 @@
 package com.ferick.alexander;
 
-import com.ferick.alexander.browsers.Browser;
 import com.ferick.alexander.config.Property;
 import com.ferick.alexander.pages.entrance.LoginPage;
 import com.ferick.alexander.pages.entrance.MainPage;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -23,13 +19,6 @@ public class SiteLoginTest extends TestBase {
             "попробуйте еще раз (убедитесь, что режим Caps Lock выключен).";
     private static final String WRONG_AUTH = "wrong_auth";
     private static final String WRONG_PASSWORD = "wrong_password";
-
-    private Browser browser;
-
-    @BeforeClass
-    public void setUp() {
-        browser = app.browser();
-    }
 
     @Test(description = "Testing MainPage is open")
     public void mainPageOpenTest() {
@@ -86,16 +75,6 @@ public class SiteLoginTest extends TestBase {
         log.info("Check it returns to login page anew and error message is displayed");
         assertTrue(returnedLoginPage.isOpened(), "LoginPage is not open anew");
         assertEquals(loginPage.getErrorMessage(), LOGIN_ERROR_MESSAGE_ENG, "Error message is not correct");
-    }
-
-    @AfterMethod
-    public void clearBrowser() {
-        browser.clearCache();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        browser.closeBrowser();
     }
 
     @DataProvider(name = "Login data")

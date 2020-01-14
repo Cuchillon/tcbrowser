@@ -1,8 +1,6 @@
 package com.ferick.alexander;
 
-import com.ferick.alexander.browsers.Browser;
 import com.ferick.alexander.pages.entrance.MainPage;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.regex.Matcher;
@@ -13,13 +11,6 @@ import static org.testng.Assert.assertTrue;
 public class ActiveTopicsTest extends TestBase {
 
     private static final int ACTIVE_TOPIC_NUMBER = 0;
-
-    private Browser browser;
-
-    @BeforeClass
-    public void setUp() {
-        browser = app.browser();
-    }
 
     @Test(description = "Active topics are open")
     public void activeTopicsOpenTest() {
